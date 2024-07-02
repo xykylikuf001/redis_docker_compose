@@ -1,0 +1,17 @@
+services:
+
+  redis:
+    container_name: ${STACK_NAME?Variable not set}-redis
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - project-tier
+    volumes:
+      - project-redis:/data
+
+
+volumes:
+  project-redis:
+    driver: local
